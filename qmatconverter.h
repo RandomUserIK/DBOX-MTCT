@@ -2,7 +2,8 @@
 #define QMATCONVERTER_H
 
 // OpenCV
-#include "opencv/cv.hpp"
+#include "opencv4/opencv2/cvconfig.h"
+#include "opencv2/opencv.hpp"
 
 // Qt
 #include <QImage>

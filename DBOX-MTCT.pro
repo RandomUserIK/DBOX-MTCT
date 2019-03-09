@@ -49,37 +49,46 @@ FORMS    += mainwindow.ui
 RC_ICONS = core/config/Icons/mmtc.ico
 
 #CUDA
-unix:!macx: LIBS += -L$$PWD/../../../../../opt/cuda/lib64/ -lcudart
+unix:!macx: LIBS += -lcuda
+
+#SupremaSensor
+unix:!macx: LIBS += -L/usr/local/lib/ -lUFMatcher
+INCLUDEPATH += /usr/local/include/suprema
+DEPENDPATH += /usr/local/include/suprema
+
+#OpenCV
+unix:!macx: LIBS += -lopencv_imgcodecs
+unix:!macx: LIBS += -lopencv_imgproc
+unix:!macx: LIBS += -lopencv_highgui
+unix:!macx: LIBS += -lopencv_ml
+unix:!macx: LIBS += -lopencv_core
+
+#ArrayFire
+unix:!macx: LIBS += -L/opt/cuda/lib64/ -lcudart
 INCLUDEPATH += $$PWD/../../../../../opt/cuda/include
 DEPENDPATH += $$PWD/../../../../../opt/cuda/include
 
-#SupremaSensor
-unix:!macx: LIBS += -L$$PWD/../../../../../opt/suprema/x64/ -lUFMatcher
-INCLUDEPATH += $$PWD/../../../../../opt/suprema/include
-
-#OpenCV
-unix:!macx: LIBS += -L$$PWD/../../../../../usr/local/lib64/ -lopencv_world
-
-#ArrayFire
-unix:!macx: LIBS += -L$$PWD/../../../../../usr/lib/ -lafcuda
-
 #Caffe
-unix:!macx: LIBS += -L$$PWD/../../../../../usr/lib64/ -lcaffe
-unix:!macx: LIBS += -L$$PWD/../../../../../usr/lib64/ -lboost_system
-unix:!macx: LIBS += -L$$PWD/../../../../../usr/lib64/ -lglog
-unix:!macx: LIBS += -L$$PWD/../../../../../usr/lib64/ -lprotobuf
+unix:!macx: LIBS += -L/usr/lib/ -lcaffe
+unix:!macx: LIBS += -L/usr/lib/ -lboost_system
+unix:!macx: LIBS += -L/usr/lib/ -lglog
+unix:!macx: LIBS += -L/usr/lib/ -lprotobuf
 
 #Preprocessing
-unix:!macx: LIBS += -L$$PWD/../Preprocessing/ -lPreprocessing
-INCLUDEPATH += $$PWD/../Preprocessing
-DEPENDPATH += $$PWD/../Preprocessing
+unix:!macx: LIBS += -L$$PWD/../build-Preprocessing-Desktop-Debug/ -lPreprocessing
+
+INCLUDEPATH += $$PWD/../openfinger-preprocessor-master
+DEPENDPATH += $$PWD/../openfinger-preprocessor-master
 
 #Extraction
-unix:!macx: LIBS += -L$$PWD/../Extraction/ -lExtraction
-INCLUDEPATH += $$PWD/../Extraction
-DEPENDPATH += $$PWD/../Extraction
+unix:!macx: LIBS += -L$$PWD/../build-Extraction-Desktop-Debug/ -lExtraction
+
+INCLUDEPATH += $$PWD/../openfinger-extractor-master
+DEPENDPATH += $$PWD/../openfinger-extractor-master
+
 
 #Matcher
-unix:!macx: LIBS += -L$$PWD/../Matcher/ -lMatcher
-INCLUDEPATH += $$PWD/../Matcher
-DEPENDPATH += $$PWD/../Matcher
+unix:!macx: LIBS += -L$$PWD/../build-Matcher-Desktop-Debug/ -lMatcher
+
+INCLUDEPATH += $$PWD/../openfinger-matcher-master
+DEPENDPATH += $$PWD/../openfinger-matcher-master

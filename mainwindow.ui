@@ -24,7 +24,7 @@
     <item>
      <widget class="QTabWidget" name="tabWidget_main">
       <property name="currentIndex">
-       <number>0</number>
+       <number>2</number>
       </property>
       <widget class="QWidget" name="tab_marker">
        <attribute name="title">
@@ -4557,7 +4557,7 @@ color: white;</string>
      <x>0</x>
      <y>0</y>
      <width>1168</width>
-     <height>22</height>
+     <height>24</height>
     </rect>
    </property>
   </widget>
