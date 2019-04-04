@@ -13,6 +13,9 @@ TEMPLATE = app
 
 DESTDIR = $$PWD
 
+QMAKE_CFLAGS_ISYSTEM=
+QMAKE_RPATHDIR
+
 #QMAKE_LFLAGS += /STACK:64000000
 
 SOURCES +=  main.cpp\
@@ -49,7 +52,14 @@ FORMS    += mainwindow.ui
 RC_ICONS = core/config/Icons/mmtc.ico
 
 #CUDA
-unix:!macx: LIBS += -lcuda
+unix:!macx: LIBS += -L/opt/cuda/lib64/ -lcudart
+INCLUDEPATH += /opt/cuda/include
+DEPENDPATH += /opt/cuda/include
+
+#ArrayFire
+unix:!macx: LIBS += -L/usr/lib/ -lafcuda
+INCLUDEPATH += /usr/include
+DEPENDPATH += /usr/include
 
 #SupremaSensor
 unix:!macx: LIBS += -L/usr/local/lib/ -lUFMatcher
@@ -63,16 +73,13 @@ unix:!macx: LIBS += -lopencv_highgui
 unix:!macx: LIBS += -lopencv_ml
 unix:!macx: LIBS += -lopencv_core
 
-#ArrayFire
-unix:!macx: LIBS += -L/opt/cuda/lib64/ -lcudart
-INCLUDEPATH += $$PWD/../../../../../opt/cuda/include
-DEPENDPATH += $$PWD/../../../../../opt/cuda/include
-
 #Caffe
-unix:!macx: LIBS += -L/usr/lib/ -lcaffe
-unix:!macx: LIBS += -L/usr/lib/ -lboost_system
-unix:!macx: LIBS += -L/usr/lib/ -lglog
-unix:!macx: LIBS += -L/usr/lib/ -lprotobuf
+unix:!macx: LIBS += -L/usr/lib64/ -lcaffe
+unix:!macx: LIBS += -L/usr/lib64/ -lboost_system
+unix:!macx: LIBS += -L/usr/lib64/ -lglog
+unix:!macx: LIBS += -L/usr/lib64/ -lprotobuf
+INCLUDEPATH += /usr/local/include
+DEPENDPATH += /usr/local/include
 
 #Preprocessing
 unix:!macx: LIBS += -L$$PWD/../build-Preprocessing-Desktop-Debug/ -lPreprocessing
@@ -85,7 +92,6 @@ unix:!macx: LIBS += -L$$PWD/../build-Extraction-Desktop-Debug/ -lExtraction
 
 INCLUDEPATH += $$PWD/../openfinger-extractor-master
 DEPENDPATH += $$PWD/../openfinger-extractor-master
-
 
 #Matcher
 unix:!macx: LIBS += -L$$PWD/../build-Matcher-Desktop-Debug/ -lMatcher
